@@ -1,7 +1,6 @@
 package mouad.louhibi.api.controller.api;
 
 import mouad.louhibi.api.controller.request.AppRequest;
-import mouad.louhibi.api.controller.request.StudentRequest;
 import mouad.louhibi.api.dto.AppModelDTO;
 import mouad.louhibi.api.dto.mapper.AppModelDTOMapper;
 import mouad.louhibi.api.service.AppService;
@@ -17,12 +16,6 @@ public class AppController {
 
     @Autowired
     private AppService service;
-
-
-    @PostMapping("/test")
-    public String test(@RequestBody String txt){
-        return txt;
-    }
 
     @PostMapping(name = "CreateStudentRecord", value = "/student", consumes = "application/json")
     public ResponseEntity<Integer> createStudentRecordV1(@RequestBody AppRequest request) {

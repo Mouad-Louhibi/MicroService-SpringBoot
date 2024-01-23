@@ -25,13 +25,12 @@ public class AppRepository {
 
         jdbcTemplate.setIgnoreWarnings(false);
     }
-
     public Map<String, Object> createStudentRecord(AppModel model){
         simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("create_student");
         SqlParameterSource in = new MapSqlParameterSource()
                 .addValue("student_fname", model.getStudent().getFname())
-                .addValue("student_lname", model.getStudent().getFname())
-                .addValue("student_dob", model.getStudent().getFname())
+                .addValue("student_lname", model.getStudent().getLname())
+                .addValue("student_dob", model.getStudent().getDob())
                 .addValue("subject_name", model.getSubject().getName())
                 .addValue("subject_section", model.getSubject().getSection())
                 .addValue("subject_teacher", model.getSubject().getTeacher());
