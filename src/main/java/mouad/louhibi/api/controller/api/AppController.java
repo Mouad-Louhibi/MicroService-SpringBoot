@@ -42,8 +42,8 @@ public class AppController {
     }
 
     @PutMapping(name = "UpdateStudent", value = "/student", consumes = "application/json")
-    public ResponseEntity<Integer> updateStudentV1(@RequestBody AppRequest request) {
-        Integer record = service.updateStudent(new AppModelDTOMapper().mapToDTO(request));
+    public ResponseEntity<Integer> updateStudentV1(@RequestBody AppRequest request, @RequestParam Integer id) {
+        Integer record = service.updateStudent(new AppModelDTOMapper().mapToDTO(request), id);
         return new ResponseEntity<>(record, HttpStatus.CREATED);
     }
 }

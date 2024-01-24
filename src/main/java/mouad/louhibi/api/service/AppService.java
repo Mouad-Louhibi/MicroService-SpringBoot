@@ -21,8 +21,8 @@ public class AppService {
         ObjectMapper mapper = new ObjectMapper();
         return (Integer) (mapper.convertValue(((ArrayList<?>) out.get("#result-set-1")).get(0), Map.class)).get("id");
     }
-    public Integer updateStudent(AppModelDTO dto) {
-        Map<String, Object> out = repository.createStudentRecord(new AppModelMapper().mapToModel(dto));
+    public Integer updateStudent(AppModelDTO dto, Integer id) {
+        Map<String, Object> out = repository.updateStudentRecord(new AppModelMapper().mapToModel(dto), id);
         ObjectMapper mapper = new ObjectMapper();
         return (Integer) (mapper.convertValue(((ArrayList<?>) out.get("#result-set-1")).get(0), Map.class)).get("id");
     }
