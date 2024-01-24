@@ -111,9 +111,17 @@ VALUES
   ('Olivia', 'Clark', '1989-06-30'),
   ('Matthew', 'Moore', '1997-02-05'),
   ('Emma', 'Jones', '1994-08-22');
+  
+DELETE FROM student
+WHERE id = 1;
 
-SET sql_mode = 'ONLY_FULL_GROUP_BY,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+SELECT * FROM student;
 
+DELIMITER //
+CREATE PROCEDURE get_students ()
+BEGIN
+    SELECT * FROM student;
+END //
 
 DELIMITER //
 

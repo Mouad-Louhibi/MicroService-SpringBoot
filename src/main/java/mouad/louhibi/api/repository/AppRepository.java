@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -63,6 +64,18 @@ public class AppRepository {
     public Map<String, Object> getStudents() {
         simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("get_students");
         SqlParameterSource in = new MapSqlParameterSource();
+
+        Map<String, Object> result = getStudents();
+
+        // Assuming you have an output parameter named 'out_result_set' in your stored procedure
+        List<Map<String, Object>> resultSet = (List<Map<String, Object>>) result.get("out_result_set");
+
+        // Process the data in the result set
+        for (Map<String, Object> row : resultSet) {
+            // Access individual columns using column names
+            Object studentId = row.get("student_id");
+            Object studentName = row.get("student_name");
+        }
 
         return simpleJdbcCall.execute(in);
     }
