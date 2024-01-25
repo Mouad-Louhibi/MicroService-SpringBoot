@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -29,8 +30,12 @@ public class AppService {
 
     public Object getStudent(Integer id) {
         Map<String, Object> out = repository.getStudent(id);
+
+//        System.out.println(((ArrayList<?>) out.get("#result-set-1")).get(0));
+
         ObjectMapper mapper = new ObjectMapper();
-        return mapper.convertValue(((ArrayList<?>) out.get("#result-set-1")).get(0), Map.class);
+//        return mapper.convertValue(((ArrayList<?>) out.get("#result-set-1")).get(0), Map.class);
+        return ((ArrayList<?>) out.get("#result-set-1")).get(0);
     }
 
     public Integer deleteStudent(Integer id) {
@@ -41,6 +46,16 @@ public class AppService {
 
     public Object getStudents() {
         Map<String, Object> out = repository.getStudents();
+
+        // Assuming you have an output parameter named 'out_result_set' in your stored procedure
+        List<Map<String, Object>> resultSet = (List<Map<String, Object>>) out.get("out_result_set");
+
+        // Process the data in the result set
+        for (Map<String, Object> row : resultSet) {
+            // Access individual columns using column names
+            Object studentId = row.get("student_id");
+            Object studentName = row.get("student_name");
+        }
         return (ArrayList<?>) out.get("#result-set-1");
     }
 }
