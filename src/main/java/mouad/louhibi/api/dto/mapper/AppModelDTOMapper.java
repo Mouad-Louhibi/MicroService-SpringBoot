@@ -23,12 +23,22 @@ public class AppModelDTOMapper {
                                 .setName(request.getSubject().getName())
                                 .setSection(request.getSubject().getSection())
                                 .setTeacher(request.getSubject().getTeacher())
-                )
-                ;
+                );
     }
 
     public AppModelDTO mapToDTO(Object obj) {
-        return new AppModelDTO();
+        return new AppModelDTO().setStudent(
+                        new StudentModelDTO()
+                                .setFname(obj.toString())
+                                .setLname(obj.toString())
+                                .setDob(obj.toString())
+                )
+                .setSubject(
+                        new SubjectModelDTO()
+                                .setName(obj.toString())
+                                .setSection(obj.toString())
+                                .setTeacher(obj.toString())
+                );
     }
 
     public List<AppModelDTO> mapToDTOs(Object obj) {

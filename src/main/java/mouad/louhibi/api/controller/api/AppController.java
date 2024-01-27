@@ -28,6 +28,7 @@ public class AppController {
         Object result = service.getStudent(id);
         if (result != null) {
             AppModelDTO student = new AppModelDTOMapper().mapToDTO(result);
+            System.out.println(student);
             return new ResponseEntity<>(student, HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND); // or another appropriate response

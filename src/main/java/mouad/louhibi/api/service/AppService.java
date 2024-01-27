@@ -36,7 +36,6 @@ public class AppService {
 
             if (!resultSet.isEmpty()) {
                 ObjectMapper mapper = new ObjectMapper();
-                System.out.print(resultSet.get(0));
                 return mapper.convertValue(resultSet.get(0), Map.class);
             }
         }
