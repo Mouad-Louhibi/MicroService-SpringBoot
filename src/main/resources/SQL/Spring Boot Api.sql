@@ -48,7 +48,27 @@ BEGIN
     SELECT student_id AS created_student_id;
 END //
 
+DELIMITER //
+
+DROP PROCEDURE IF EXISTS get_student;
+CREATE PROCEDURE get_student(IN student_id INT)
+BEGIN
+    SELECT
+        s.id AS student_id,
+        s.fname AS student_fname,
+        s.lname AS student_lname,
+        s.dob AS student_dob,
+        su.id AS subject_id,
+        su.name AS subject_name,
+        su.section AS subject_section,
+        su.teacher AS subject_teacher
+    FROM student s
+    LEFT JOIN subject su ON s.id = su.student_id
+    WHERE s.id = student_id;
+END //
+
 DELIMITER ;
+
 
 SELECT * FROM springboot.student;
 SELECT * FROM springboot.subject;
@@ -86,6 +106,7 @@ DELETE FROM student
 WHERE id = 1;
 
 SELECT * FROM student;
+SELECT * FROM subject;
 
 DELIMITER //
 CREATE PROCEDURE get_students ()
