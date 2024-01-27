@@ -3,14 +3,12 @@ package mouad.louhibi.api.repository;
 import jakarta.annotation.PostConstruct;
 import mouad.louhibi.api.model.AppModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Map;
 
 @Repository
@@ -57,10 +55,10 @@ public class AppRepository {
     public Map<String, Object> getStudent(Integer id) {
 
         simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("get_student")
-                .returningResultSet("student_subject", BeanPropertyRowMapper.newInstance(AppModel.class));
+                .withProcedureName("get_student");
+//                .returningResultSet("student_subject", BeanPropertyRowMapper.newInstance(StudentSubject.class));
 
-        simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("get_student");
+//        simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("get_student");
         SqlParameterSource in = new MapSqlParameterSource()
                 .addValue("student_id", id);
 

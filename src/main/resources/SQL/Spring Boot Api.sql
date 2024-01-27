@@ -1,10 +1,6 @@
 -- Create the student table
-CREATE TABLE student (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    fname VARCHAR(255) NOT NULL,
-    lname VARCHAR(255) NOT NULL,
-    dob DATE NOT NULL
-);
+ALTER TABLE student
+MODIFY COLUMN dob VARCHAR(255);
 
 -- Create the subject table
 CREATE TABLE subject (
