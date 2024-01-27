@@ -16,36 +16,6 @@ CREATE TABLE subject (
     FOREIGN KEY (student_id) REFERENCES student(id)
 );
 
-DELIMITER //
-
-CREATE PROCEDURE create_student (
-    IN student_fname VARCHAR(255),
-    IN student_lname VARCHAR(255),
-    IN student_dob DATE,
-    IN subject_name VARCHAR(255),
-    IN subject_section VARCHAR(255),
-    IN subject_teacher VARCHAR(255)
-)
-BEGIN
-    DECLARE student_id INT;
-
-    -- Insert into the student table
-    INSERT INTO student (fname, lname, dob)
-    VALUES (student_fname, student_lname, student_dob);
-
-    -- Get the last inserted student ID
-    SET student_id = LAST_INSERT_ID();
-
-    -- Insert into the subject table
-    INSERT INTO subject (name, section, teacher, student_id)
-    VALUES (subject_name, subject_section, subject_teacher, student_id);
-
-    -- You can return additional information if needed
-    -- For example, you can return the newly created student ID
-    SELECT student_id AS created_student_id;
-END //
-
-DELIMITER ;
 
 DROP PROCEDURE IF EXISTS create_student;
 

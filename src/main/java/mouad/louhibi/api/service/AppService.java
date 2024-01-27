@@ -31,11 +31,21 @@ public class AppService {
     public Object getStudent(Integer id) {
         Map<String, Object> out = repository.getStudent(id);
 
-//        System.out.println(((ArrayList<?>) out.get("#result-set-1")).get(0));
+        if (out != null && out.containsKey("#result-set-1")) {
+            ArrayList<?> resultSet = (ArrayList<?>) out.get("#result-set-1");
 
-        ObjectMapper mapper = new ObjectMapper();
+            if (!resultSet.isEmpty()) {
+                ObjectMapper mapper = new ObjectMapper();
+                System.out.print(resultSet.get(0));
+                return mapper.convertValue(resultSet.get(0), Map.class);
+            }
+        }
+
+        return null;
+//        Map<String, Object> out = repository.getStudent(id);
+//        ObjectMapper mapper = new ObjectMapper();
+//        System.out.print(((ArrayList<?>) out.get("#result-set-1")).get(0));
 //        return mapper.convertValue(((ArrayList<?>) out.get("#result-set-1")).get(0), Map.class);
-        return ((ArrayList<?>) out.get("#result-set-1")).get(0);
     }
 
     public Integer deleteStudent(Integer id) {

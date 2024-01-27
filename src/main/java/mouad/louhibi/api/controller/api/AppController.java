@@ -25,8 +25,13 @@ public class AppController {
 
     @GetMapping(name = "GetStudent", value = "/student"  , produces = "application/json")
     public ResponseEntity<AppModelDTO> getStudentV1(@RequestParam() Integer id) {
-        AppModelDTO student = new AppModelDTOMapper().mapToDTO(service.getStudent(id));
-        return new ResponseEntity<>(student, HttpStatus.OK);
+        Object result = service.getStudent(id);
+        if (result != null) {
+            AppModelDTO student = new AppModelDTOMapper().mapToDTO(result);
+            return new ResponseEntity<>(student, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND); // or another appropriate response
+        }
     }
 
     @GetMapping(name = "GetStudents", value = "/students", produces = "application/json")
