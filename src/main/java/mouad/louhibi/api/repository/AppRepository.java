@@ -53,12 +53,7 @@ public class AppRepository {
     }
 
     public Map<String, Object> getStudent(Integer id) {
-
-        simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
-                .withProcedureName("get_student");
-//                .returningResultSet("student_subject", BeanPropertyRowMapper.newInstance(StudentSubject.class));
-
-//        simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("get_student");
+        simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("get_student");
         SqlParameterSource in = new MapSqlParameterSource()
                 .addValue("student_id", id);
 

@@ -31,8 +31,6 @@ public class AppService {
     public Object getStudent(Integer id) {
         Map<String, Object> out = repository.getStudent(id);
 
-        System.out.println((ArrayList<?>) out.get("#result-set-1"));
-
         if (out != null && out.containsKey("#result-set-1")) {
             ArrayList<?> resultSet = (ArrayList<?>) out.get("#result-set-1");
 
