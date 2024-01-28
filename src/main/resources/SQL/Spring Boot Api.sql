@@ -3,13 +3,14 @@ ALTER TABLE student
 MODIFY COLUMN dob VARCHAR(255);
 
 -- Create the subject table
+DROP TABLE IF EXISTS subject;
 CREATE TABLE subject (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,
     section VARCHAR(255) NOT NULL,
     teacher VARCHAR(255) NOT NULL,
     student_id INT,
-    FOREIGN KEY (student_id) REFERENCES student(id)
+    FOREIGN KEY (student_id) REFERENCES student(id) ON DELETE CASCADE
 );
 
 
@@ -146,6 +147,22 @@ BEGIN
     WHERE
         subject_id_column = subject_id_var; -- Use the retrieved subject ID
 END //
+
+DELIMITER //
+
+CREATE PROCEDURE delete_student(IN student_id INT)
+BEGIN
+    -- Check if the student exists
+    IF EXISTS (SELECT 1 FROM student WHERE id = student_id) THEN
+        -- Delete the student record
+        DELETE FROM student WHERE id = student_id;
+        SELECT 'Student deleted successfully' AS result;
+    ELSE
+        SELECT 'Student not found' AS result;
+    END IF;
+END //
+
+DELIMITER ;
 
 DELETE FROM student WHERE id > 0;
 DELETE FROM subject WHERE id > 0;

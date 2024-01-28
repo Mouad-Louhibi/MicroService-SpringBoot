@@ -46,7 +46,7 @@ public class AppService {
     public Integer deleteStudent(Integer id) {
         Map<String, Object> out = repository.deleteStudent(id);
         ObjectMapper mapper = new ObjectMapper();
-        return (Integer) mapper.convertValue(((ArrayList<?>) out.get("#result-set-1")).get(0), Map.class).get("id");
+        return (Integer) mapper.convertValue(((ArrayList<?>) out.get("#result-set-1")).get(0), Map.class).get("deleted_student_id");
     }
 
     public Object getStudents() {
