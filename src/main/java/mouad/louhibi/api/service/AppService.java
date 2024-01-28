@@ -20,12 +20,12 @@ public class AppService {
     public Integer createStudentRecord(AppModelDTO dto){
         Map<String, Object> out = repository.createStudentRecord(new AppModelMapper().mapToModel(dto));
         ObjectMapper mapper = new ObjectMapper();
-        return (Integer) (mapper.convertValue(((ArrayList<?>) out.get("#result-set-1")).get(0), Map.class)).get("id");
+        return (Integer) (mapper.convertValue(((ArrayList<?>) out.get("#result-set-1")).get(0), Map.class)).get("created_student_id");
     }
     public Integer updateStudent(AppModelDTO dto, Integer id) {
         Map<String, Object> out = repository.updateStudentRecord(new AppModelMapper().mapToModel(dto), id);
         ObjectMapper mapper = new ObjectMapper();
-        return (Integer) (mapper.convertValue(((ArrayList<?>) out.get("#result-set-1")).get(0), Map.class)).get("id");
+        return (Integer) (mapper.convertValue(((ArrayList<?>) out.get("#result-set-1")).get(0), Map.class)).get("updated_student_id");
     }
 
     public Object getStudent(Integer id) {
@@ -41,10 +41,6 @@ public class AppService {
         }
 
         return null;
-//        Map<String, Object> out = repository.getStudent(id);
-//        ObjectMapper mapper = new ObjectMapper();
-//        System.out.print(((ArrayList<?>) out.get("#result-set-1")).get(0));
-//        return mapper.convertValue(((ArrayList<?>) out.get("#result-set-1")).get(0), Map.class);
     }
 
     public Integer deleteStudent(Integer id) {

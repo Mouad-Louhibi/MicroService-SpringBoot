@@ -146,3 +146,6 @@ BEGIN
     WHERE
         subject_id_column = subject_id_var; -- Use the retrieved subject ID
 END //
+
+DELETE FROM student WHERE id > 0;
+DELETE FROM subject WHERE id > 0;
