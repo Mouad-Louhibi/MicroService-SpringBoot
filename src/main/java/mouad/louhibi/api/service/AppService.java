@@ -51,9 +51,15 @@ public class AppService {
 
     public Object getStudents() {
         Map<String, Object> out = repository.getStudents();
+        List<Map<String, Object>> resultSet = (List<Map<String, Object>>) out.get("#result-set-1");
 
-        System.out.println("Out: " + out);
-        System.out.println("Out.get(): " + out.get("#result-set-1"));
+        for (Map<String, Object> row : resultSet) {
+
+            Object studentId = row.get("student_id");
+            Object studentName = row.get("student_name");
+
+            // Do something with the data...
+        }
 
         return out.get("#result-set-1");
     }
