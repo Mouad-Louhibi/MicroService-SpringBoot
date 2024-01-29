@@ -106,12 +106,25 @@ SELECT * FROM student;
 SELECT * FROM subject;
 
 DELIMITER //
-CREATE PROCEDURE get_students ()
+
+CREATE PROCEDURE get_students()
 BEGIN
-    SELECT * FROM student;
+    SELECT
+        s.id AS student_id,
+        s.fname AS student_fname,
+        s.lname AS student_lname,
+        s.dob AS student_dob,
+        su.id AS subject_id,
+        su.name AS subject_name,
+        su.section AS subject_section,
+        su.teacher AS subject_teacher
+    FROM
+        student s
+    LEFT JOIN
+        subject su ON s.id = su.student_id;
 END //
 
-DELIMITER //
+DELIMITER ;
 
 CREATE PROCEDURE update_student (
     IN student_id INT,  -- New parameter for student ID

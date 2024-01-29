@@ -52,15 +52,9 @@ public class AppService {
     public Object getStudents() {
         Map<String, Object> out = repository.getStudents();
 
-        // Assuming you have an output parameter named 'out_result_set' in your stored procedure
-        List<Map<String, Object>> resultSet = (List<Map<String, Object>>) out.get("out_result_set");
+        System.out.println("Out: " + out);
+        System.out.println("Out.get(): " + out.get("#result-set-1"));
 
-        // Process the data in the result set
-        for (Map<String, Object> row : resultSet) {
-            // Access individual columns using column names
-            Object studentId = row.get("student_id");
-            Object studentName = row.get("student_name");
-        }
-        return (ArrayList<?>) out.get("#result-set-1");
+        return out.get("#result-set-1");
     }
 }
