@@ -51,7 +51,26 @@ public class AppModelDTOMapper {
     }
 
     public List<AppModelDTO> mapToDTOs(Object obj) {
-        return new ArrayList<>();
+        List<Map<String, Object>> resultSet = (List<Map<String, Object>>) obj;
+        List<AppModelDTO> students = new ArrayList<AppModelDTO>();
+
+        for (Map<String, Object> row : resultSet) {
+            AppModelDTO temp = new AppModelDTO().setStudent(
+                            new StudentModelDTO()
+                                    .setFname((String) row.get("student_fname"))
+                                    .setLname((String) row.get("student_lname"))
+                                    .setDob((String) row.get("student_dob"))
+                    )
+                    .setSubject(
+                            new SubjectModelDTO()
+                                    .setName((String) row.get("subject_name"))
+                                    .setSection((String) row.get("subject_section"))
+                                    .setTeacher((String) row.get("subject_teacher"))
+                    )
+                    ;
+            students.add(temp);
+        }
+        return students;
     }
 
 }

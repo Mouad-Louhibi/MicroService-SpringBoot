@@ -124,45 +124,6 @@ BEGIN
         subject su ON s.id = su.student_id;
 END //
 
-DELIMITER ;
-
-CREATE PROCEDURE update_student (
-    IN student_id INT,  -- New parameter for student ID
-    IN student_fname VARCHAR(255),
-    IN student_lname VARCHAR(255),
-    IN student_dob VARCHAR(255), 
-    IN subject_name VARCHAR(255),
-    IN subject_section VARCHAR(255),
-    IN subject_teacher VARCHAR(255)
-)
-BEGIN
-    DECLARE subject_id_var INT;
-
-    -- Get subject ID based on subject name
-    SELECT subject_id_column INTO subject_id_var
-    FROM subject
-    WHERE name = subject_name;
-
-    -- Update student information
-    UPDATE student
-    SET
-        fname = student_fname,
-        lname = student_lname,
-        dob = student_dob
-    WHERE
-        student_id_column = student_id; -- Use the provided student ID parameter
-
-    -- Update subject information
-    UPDATE subject
-    SET
-        section = subject_section,
-        teacher = subject_teacher
-    WHERE
-        subject_id_column = subject_id_var; -- Use the retrieved subject ID
-END //
-
-DELIMITER //
-
 CREATE PROCEDURE delete_student(IN student_id INT)
 BEGIN
     -- Check if the student exists

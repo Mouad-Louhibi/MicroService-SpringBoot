@@ -1,9 +1,14 @@
 package mouad.louhibi.api.model.mapper;
 
 import mouad.louhibi.api.dto.AppModelDTO;
+import mouad.louhibi.api.dto.mapper.AppModelDTOMapper;
 import mouad.louhibi.api.model.AppModel;
 import mouad.louhibi.api.model.StudentModel;
 import mouad.louhibi.api.model.SubjectModel;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 public class AppModelMapper {
 

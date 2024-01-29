@@ -38,7 +38,6 @@ public class AppController {
     @GetMapping(name = "GetStudents", value = "/students", produces = "application/json")
     public ResponseEntity<List<AppModelDTO>> getStudentsV1() {
         List<AppModelDTO> students =  new AppModelDTOMapper().mapToDTOs(service.getStudents());
-        System.out.println("Controller: " + service.getStudents());
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
