@@ -66,7 +66,6 @@ END //
 
 DELIMITER ;
 
-
 SELECT * FROM springboot.student;
 SELECT * FROM springboot.subject;
 
@@ -85,25 +84,6 @@ BEGIN
 		AND dob IS NOT NULL
 		AND dob != '0000-00-00';
 END //
-
-INSERT INTO student (fname, lname, dob)
-VALUES
-  ('John', 'Doe', '1990-01-15'),
-  ('Jane', 'Smith', '1992-05-20'),
-  ('Mike', 'Johnson', '1988-11-10'),
-  ('Emily', 'Williams', '1995-03-25'),
-  ('David', 'Brown', '1998-09-08'),
-  ('Sophia', 'Miller', '1993-07-12'),
-  ('Daniel', 'Taylor', '1991-04-18'),
-  ('Olivia', 'Clark', '1989-06-30'),
-  ('Matthew', 'Moore', '1997-02-05'),
-  ('Emma', 'Jones', '1994-08-22');
-  
-DELETE FROM student
-WHERE id = 1;
-
-SELECT * FROM student;
-SELECT * FROM subject;
 
 DELIMITER //
 
@@ -137,6 +117,54 @@ BEGIN
 END //
 
 DELIMITER ;
+
+DELIMITER //
+
+CREATE PROCEDURE update_student(
+    IN p_student_id INT,
+    IN p_fname VARCHAR(255),
+    IN p_lname VARCHAR(255),
+    IN p_dob VARCHAR(255),
+    IN p_subject_name VARCHAR(255),
+    IN p_subject_section VARCHAR(255),
+    IN p_subject_teacher VARCHAR(255)
+)
+BEGIN
+    -- Check if the student exists
+    IF EXISTS (SELECT 1 FROM student WHERE id = p_student_id) THEN
+        -- Update the student record
+        UPDATE student
+        SET
+            fname = p_fname,
+            lname = p_lname,
+            dob = p_dob
+        WHERE id = p_student_id;
+
+        -- Check if the subject exists
+        IF EXISTS (SELECT 1 FROM subject WHERE student_id = p_student_id) THEN
+            -- Update the subject record
+            UPDATE subject
+            SET
+                name = p_subject_name,
+                section = p_subject_section,
+                teacher = p_subject_teacher
+            WHERE student_id = p_student_id;
+        ELSE
+            -- If subject does not exist, you may choose to insert a new subject record here
+            INSERT INTO subject (name, section, teacher, student_id) VALUES (p_subject_name, p_subject_section, p_subject_teacher, p_student_id);
+        END IF;
+
+        SELECT 'Student and subject records updated successfully' AS result;
+    ELSE
+        SELECT 'Student not found' AS result;
+    END IF;
+END //
+
+DELIMITER ;
+
+
+SELECT * FROM student;
+SELECT * FROM subject;
 
 DELETE FROM student WHERE id > 0;
 DELETE FROM subject WHERE id > 0;

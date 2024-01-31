@@ -41,13 +41,13 @@ public class AppRepository {
     public Map<String, Object> updateStudentRecord(AppModel model, Integer id) {
         simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate).withProcedureName("update_student");
         SqlParameterSource in = new MapSqlParameterSource()
-                .addValue("student_id", id)
-                .addValue("student_fname", model.getStudent().getFname())
-                .addValue("student_lname", model.getStudent().getLname())
-                .addValue("student_dob", model.getStudent().getDob())
-                .addValue("subject_name", model.getSubject().getName())
-                .addValue("subject_section", model.getSubject().getSection())
-                .addValue("subject_teacher", model.getSubject().getTeacher());
+                .addValue("p_student_id", id)
+                .addValue("p_fname", model.getStudent().getFname())
+                .addValue("p_lname", model.getStudent().getLname())
+                .addValue("p_dob", model.getStudent().getDob())
+                .addValue("p_subject_name", model.getSubject().getName())
+                .addValue("p_subject_section", model.getSubject().getSection())
+                .addValue("p_subject_teacher", model.getSubject().getTeacher());
 
         return simpleJdbcCall.execute(in);
     }
